@@ -1,0 +1,5 @@
+# File we don't want to track
+.netrwhist
+
+# Don't track the actual plugin source
+bundle/
