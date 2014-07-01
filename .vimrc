@@ -76,9 +76,8 @@ set pastetoggle=<F2>		" Toggle paste mode using F2
 """"""""""""""""""""
 " Colorschemes
 """""""""""""""""""
-if has('unix')
-    set t_Co=256
-endif
+set t_Co=256
+"let g:solarized_termcolors=256
 if &t_Co >= 256 || has("gui_running")
 	set background=dark
 	colorscheme solarized
