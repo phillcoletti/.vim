@@ -17,6 +17,7 @@ Plugin 'terryma/vim-multiple-cursors'		" Multiple Cursors
 Plugin 'ervandew/supertab'		" Tab Completion
 " Plugin 'lsdr/monokai' 			" Sublime default colorscheme
 Plugin 'tomasr/molokai' 			" Sublime default colorscheme
+Plugin 'kien/ctrlp.vim' 			" File search
 
 """""""""""""""""""""""""""""""""""""""""""""""
 " END Plugins (managed by Vundle)
@@ -75,6 +76,9 @@ if has('autocmd')            " Python specific indenting
 	autocmd filetype html,xml set listchars-=tab:>.
 endif
 set pastetoggle=<F2>		" Toggle paste mode using F2
+" Enforce 80 character line length
+:set colorcolumn=80
+
 """"""""""""""""""""
 " Colorschemes
 """""""""""""""""""
@@ -98,3 +102,13 @@ noremap <Leader>n :NERDTreeToggle<cr>		" Nerd tree shortcut
 if has('autocmd')
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 endif
+let NERDTreeDirArrows=0
+
+""""""""""""""""""""""""
+" CtrlP
+" """"""""""""""""""""""
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
