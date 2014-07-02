@@ -15,6 +15,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'		" directory tree on left sidebar
 Plugin 'terryma/vim-multiple-cursors'		" Multiple Cursors
 Plugin 'ervandew/supertab'		" Tab Completion
+" Plugin 'lsdr/monokai' 			" Sublime default colorscheme
+Plugin 'tomasr/molokai' 			" Sublime default colorscheme
 
 """""""""""""""""""""""""""""""""""""""""""""""
 " END Plugins (managed by Vundle)
@@ -78,9 +80,10 @@ set pastetoggle=<F2>		" Toggle paste mode using F2
 """""""""""""""""""
 set t_Co=256
 "let g:solarized_termcolors=256
+let g:rehash256 = 1
 if &t_Co >= 256 || has("gui_running")
-	set background=dark
-	colorscheme solarized
+"	set background=dark
+	colorscheme molokai
 endif
 
 " switch syntax highlighting on, when the terminal has colors
