@@ -15,9 +15,11 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'		" directory tree on left sidebar
 Plugin 'terryma/vim-multiple-cursors'		" Multiple Cursors
 Plugin 'ervandew/supertab'		" Tab Completion
-" Plugin 'lsdr/monokai' 			" Sublime default colorscheme
 Plugin 'tomasr/molokai' 			" Sublime default colorscheme
+Plugin 'octol/vim-cpp-enhanced-highlight' " c++ syntax highlighting
 Plugin 'kien/ctrlp.vim' 			" File search
+Plugin 'scrooloose/nerdcommenter' " Commenter
+Plugin 'Yggdroot/indentLine'      " Indent Guides
 
 """""""""""""""""""""""""""""""""""""""""""""""
 " END Plugins (managed by Vundle)
@@ -31,18 +33,35 @@ filetype plugin indent on    " required
 let mapleader = ","
 
 
+
+"""""""""""""""""""""""""
+" Functions
+"""""""""""""""""""""""""
+" Chromium
+function! UseChromiumStyle()
+	set tabstop=2
+	set softtabstop=2
+	set shiftwidth=2
+	set expandtab
+endfunction
 """"""""""""""""""""""""""""""""""""""""""""""
 "  Basic Vim Settings
 """""""""""""""""""""""""""""""""""""""""""""
 set hidden        " keep buffer open when editing new file
 set nowrap        " don't wrap lines
-set tabstop=4     " a tab is four spaces
 set backspace=indent,eol,start
                   " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
 set number        " always show line numbers
+set expandtab     " put spaces instead of actual tab characters
+set tabstop=4     " a tab is four spaces
+set softtabstop=4
 set shiftwidth=4  " number of spaces to use for autoindenting
+let chromium_project=$CHROMIUM_PROJECT " code style on tabs; in bash_profile
+if chromium_project == '1'
+	call UseChromiumStyle()
+endif
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set showmatch     " set show matching parenthesis
 set ignorecase    " ignore case when searching
@@ -69,8 +88,10 @@ endif
 " Editing Behavior
 """"""""""""""""""""""""""""""""""""""""""
 " visually indicate white spaces and mark end of lines
-set list 
+set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
+" automatically remove trailing white space upon save
+autocmd BufWritePre * :%s/\s\+$//e
 " don't show tabs in html and xml
 if has('autocmd')            " Python specific indenting
 	autocmd filetype html,xml set listchars-=tab:>.
@@ -97,7 +118,7 @@ endif
 
 """""""""""""""""""""""""""""""""""""""""
 " Nerd Tree
-" """"""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""
 noremap <Leader>n :NERDTreeToggle<cr>		" Nerd tree shortcut
 if has('autocmd')
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -106,9 +127,15 @@ let NERDTreeDirArrows=0
 
 """"""""""""""""""""""""
 " CtrlP
-" """"""""""""""""""""""
+"""""""""""""""""""""""
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_max_files = 0 " Unset cap of 10,000 files so we find everything
+
+""""""""""""""""""""""""
+" Indent Guides
+"""""""""""""""""""""""
+let g:indentLine_char = '|'
