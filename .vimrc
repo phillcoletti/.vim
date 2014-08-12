@@ -19,7 +19,7 @@ Plugin 'tomasr/molokai' 			" Sublime default colorscheme
 Plugin 'octol/vim-cpp-enhanced-highlight' " c++ syntax highlighting
 Plugin 'kien/ctrlp.vim' 			" File search
 Plugin 'scrooloose/nerdcommenter' " Commenter
-Plugin 'Yggdroot/indentLine'      " Indent Guides
+"Plugin 'Yggdroot/indentLine'      " Indent Guides
 
 """""""""""""""""""""""""""""""""""""""""""""""
 " END Plugins (managed by Vundle)
